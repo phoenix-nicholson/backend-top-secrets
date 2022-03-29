@@ -30,6 +30,7 @@ describe('backend-top-secrets routes', () => {
       .post('/api/v1/users/')
       .send({ email: 'miklo', password: 'imkindacute' });
     expect(res.body).toEqual({
+      message: 'Signed In successfully',
       user,
     });
   });
