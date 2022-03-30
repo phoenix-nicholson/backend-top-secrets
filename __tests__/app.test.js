@@ -48,7 +48,7 @@ describe('backend-top-secrets routes', () => {
     });
   });
 
-  it('should be able to get all secrets if signed in', async () => {
+  it.only('should be able to get all secrets if signed in', async () => {
     const agent = request.agent(app);
 
     await UserService.create({ email: 'miklo', password: 'imkindacute' });
