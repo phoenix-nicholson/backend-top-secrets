@@ -15,7 +15,7 @@ describe('backend-top-secrets routes', () => {
   });
   it('should be able to sign up a user using POST', async () => {
     const res = await request(app)
-      .post('/api/v1/users')
+      .post('/api/v1/auth')
       .send({ email: 'miklo', password: 'imkindacute' });
 
     expect(res.body).toEqual({ id: expect.any(String), email: 'miklo' });
@@ -27,7 +27,7 @@ describe('backend-top-secrets routes', () => {
       password: 'imkindacute',
     });
     const res = await request(app)
-      .post('/api/v1/users/sessions')
+      .post('/api/v1/auth/sessions')
       .send({ email: 'miklo', password: 'imkindacute' });
     expect(res.body).toEqual({
       message: 'Signed in successfully',
@@ -40,7 +40,7 @@ describe('backend-top-secrets routes', () => {
       email: 'miklo',
       password: 'imkindacute',
     });
-    const res = await request(app).delete('/api/v1/users/sessions');
+    const res = await request(app).delete('/api/v1/auth/sessions');
 
     expect(res.body).toEqual({
       message: 'Signed out successfully',
@@ -48,7 +48,7 @@ describe('backend-top-secrets routes', () => {
     });
   });
 
-  it.only('should be able to get all secrets if signed in', async () => {
+  it('should be able to get all secrets if signed in', async () => {
     const agent = request.agent(app);
 
     await UserService.create({ email: 'miklo', password: 'imkindacute' });
