@@ -13,11 +13,11 @@ CREATE TABLE secrets (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 INSERT INTO 
 secrets (title, description)
 VALUES
-('secret1', 'i am thing 1'),
-('secret2', 'i am thing 2');
+('thing 1', 'i am thing 1'),
+('thing 2', 'i am thing 2');

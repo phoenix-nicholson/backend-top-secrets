@@ -61,21 +61,21 @@ describe('backend-top-secrets routes', () => {
       .send({ email: 'miklo', password: 'imkindacute' });
 
     res = await agent.get('/api/v1/secrets');
-    expect(res.status).toEqual(200);
     expect(res.body).toEqual([
       {
         id: '1',
         title: 'thing 1',
         description: 'i am thing 1',
-        created_at: expect.any(String),
+        createdAt: expect.any(String),
       },
 
       {
         id: '2',
         title: 'thing 2',
         description: 'i am thing 2',
-        created_at: expect.any(String),
+        createdAt: expect.any(String),
       },
     ]);
+    expect(res.status).toEqual(200);
   });
 });
