@@ -34,4 +34,17 @@ describe('backend-top-secrets routes', () => {
       user,
     });
   });
+
+  it('should be able to log out the user', async () => {
+    await UserService.create({
+      email: 'miklo',
+      password: 'imkindacute',
+    });
+    const res = await request(app).delete('/api/v1/users/sessions');
+
+    expect(res.body).toEqual({
+      message: 'Signed out successfully',
+      success: true,
+    });
+  });
 });
