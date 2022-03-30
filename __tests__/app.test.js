@@ -4,6 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
 const req = require('express/lib/request');
+const secrets = require('../lib/controllers/secrets');
 
 describe('backend-top-secrets routes', () => {
   beforeEach(() => {
@@ -77,5 +78,25 @@ describe('backend-top-secrets routes', () => {
       },
     ]);
     expect(res.status).toEqual(200);
+  });
+
+  it('should be able to create a secret if user is signed in', async () => {
+    const agent = request.agent(app);
+    await UserService.create({ email: 'miklo', password: 'imkindacute' });
+
+    await agent
+      .post('/api/v1/auth/sessions')
+      .send({ email: 'miklo', password: 'imkindacute' });
+
+    const res = await agent
+      .post('/api/v1/secrets')
+      .send({ title: 'test thing', description: 'testing things' });
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'test thing',
+      description: 'testing things',
+      createdAt: expect.any(String),
+    });
   });
 });
