@@ -47,4 +47,20 @@ describe('backend-top-secrets routes', () => {
       success: true,
     });
   });
+
+  it('should be able to get all secrets if signed in', async () => {
+    const agent = request.agent(app);
+
+    await UserService.create({ email: 'miklo', password: 'imkindacute' });
+
+    const res = await agent.get('/api/v1/secrets');
+    expect(res.status).toEqual(401);
+
+    await agent
+      .post('/api/v1/auth/sessions')
+      .send({ email: 'miklo', password: 'imkindacute' });
+
+    res = await agent.get('/api/v1/secrets');
+    expect(res.status).toEqual(200);
+  });
 });
