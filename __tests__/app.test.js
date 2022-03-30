@@ -53,20 +53,8 @@ describe('backend-top-secrets routes', () => {
 
     await UserService.create({ email: 'miklo', password: 'imkindacute' });
 
-    const res = await agent.get('/api/v1/secrets');
+    let res = await agent.get('/api/v1/secrets');
     expect(res.status).toEqual(401);
-
-    const secret1 = {
-      title: 'thing 1',
-      description: 'i am thing 1',
-      created_at: '2022-03-30 00:43:12.723336+07',
-    };
-
-    const secret2 = {
-      title: 'thing 2',
-      description: 'i am thing 2',
-      created_at: '2022-03-30 00:43:12.723336+07',
-    };
 
     await agent
       .post('/api/v1/auth/sessions')
@@ -74,6 +62,20 @@ describe('backend-top-secrets routes', () => {
 
     res = await agent.get('/api/v1/secrets');
     expect(res.status).toEqual(200);
-    expect(res.body).toEqual([secret1, secret2]);
+    expect(res.body).toEqual([
+      {
+        id: '1',
+        title: 'thing 1',
+        description: 'i am thing 1',
+        created_at: expect.any(String),
+      },
+
+      {
+        id: '2',
+        title: 'thing 2',
+        description: 'i am thing 2',
+        created_at: expect.any(String),
+      },
+    ]);
   });
 });

@@ -19,5 +19,5 @@ CREATE TABLE secrets (
 INSERT INTO 
 secrets (title, description)
 VALUES
-('secret1', 'i am thing 1')
-('secret2', 'i am thing 2')
+('secret1', 'i am thing 1'),
+('secret2', 'i am thing 2');
