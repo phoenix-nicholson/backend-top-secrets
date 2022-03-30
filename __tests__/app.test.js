@@ -61,6 +61,7 @@ describe('backend-top-secrets routes', () => {
       description: 'i am thing 1',
       created_at: '2022-03-30 00:43:12.723336+07',
     };
+
     const secret2 = {
       title: 'thing 2',
       description: 'i am thing 2',
