@@ -56,11 +56,23 @@ describe('backend-top-secrets routes', () => {
     const res = await agent.get('/api/v1/secrets');
     expect(res.status).toEqual(401);
 
+    const secret1 = {
+      title: 'thing 1',
+      description: 'i am thing 1',
+      created_at: '2022-03-30 00:43:12.723336+07',
+    };
+    const secret2 = {
+      title: 'thing 2',
+      description: 'i am thing 2',
+      created_at: '2022-03-30 00:43:12.723336+07',
+    };
+
     await agent
       .post('/api/v1/auth/sessions')
       .send({ email: 'miklo', password: 'imkindacute' });
 
     res = await agent.get('/api/v1/secrets');
     expect(res.status).toEqual(200);
+    expect(res.body).toEqual([secret1, secret2]);
   });
 });
