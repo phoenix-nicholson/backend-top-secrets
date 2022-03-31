@@ -3,8 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
-const req = require('express/lib/request');
-const secrets = require('../lib/controllers/secrets');
 
 describe('backend-top-secrets routes', () => {
   beforeEach(() => {
@@ -77,6 +75,7 @@ describe('backend-top-secrets routes', () => {
         createdAt: expect.any(String),
       },
     ]);
+
     expect(res.status).toEqual(200);
   });
 
